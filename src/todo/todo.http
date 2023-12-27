@@ -1,0 +1,23 @@
+GET http://localhost:3000/todos HTTP/1.1
+
+###
+
+POST http://localhost:3000/todos HTTP/1.1
+content-type: application/json
+
+{
+    "description": "Learn mongoDB",
+    "done": false,
+    "targetDate": "2024-01-04"
+}
+
+###
+
+POST http://localhost:3000/todos HTTP/1.1
+content-type: application/json
+
+{
+    "description": "Learn nestJS",
+    "done": false,
+    "targetDate": "2024-02-01"
+}
