@@ -21,3 +21,9 @@ content-type: application/json
     "done": false,
     "targetDate": "2024-02-01"
 }
+
+###
+
+GET http://localhost:3200/todos/1234 HTTP/1.1
+
+###

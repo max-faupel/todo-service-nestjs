@@ -1,7 +1,14 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { TodoService } from './todo.service';
 import { Todo } from './schemas/todo.schema';
+import { TodoService } from './todo.service';
 
 export interface MessageEvent {
   data: string | object;
@@ -22,5 +29,15 @@ export class TodoController {
   @Get()
   findAll(): Promise<Todo[]> {
     return this.todoService.findAll();
+  }
+
+  @Get('/:id')
+  async findOne(@Param('id') id: string): Promise<Todo> {
+    const todo = await this.todoService.findOne(id.toString());
+
+    if (!todo) {
+      throw new NotFoundException('Todo does not exist!');
+    }
+    return todo;
   }
 }

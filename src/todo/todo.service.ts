@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, isValidObjectId } from 'mongoose';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './schemas/todo.schema';
 
@@ -15,5 +15,13 @@ export class TodoService {
 
   async findAll(): Promise<Todo[]> {
     return this.todoModel.find().exec();
+  }
+
+  async findOne(id: string): Promise<Todo> {
+    if (!isValidObjectId(id)) {
+      Logger.error(`ObjectId ${id} is not valid!`);
+      return;
+    }
+    return this.todoModel.findById(id).exec();
   }
 }
