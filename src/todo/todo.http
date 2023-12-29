@@ -1,3 +1,5 @@
+###
+
 GET http://localhost:3200/todos HTTP/1.1
 
 ###
@@ -24,6 +26,17 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3200/todos/1234 HTTP/1.1
+POST http://localhost:3200/todos HTTP/1.1
+content-type: application/json
+
+{
+    "description": "Learn nextJS",
+    "done": false,
+    "targetDate": "2024-03-01"
+}
+
+###
+
+GET http://localhost:3200/todos/658c4da15d46481d641f35d0 HTTP/1.1
 
 ###
