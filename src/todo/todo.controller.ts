@@ -7,8 +7,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { Todo } from './schemas/todo.schema';
 import { TodoService } from './todo.service';
+import { Todo } from './todo.entity';
 
 export interface MessageEvent {
   data: string | object;

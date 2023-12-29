@@ -1,27 +1,26 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model, isValidObjectId } from 'mongoose';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { Todo } from './schemas/todo.schema';
+import { Todo } from './todo.entity';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class TodoService {
-  constructor(@InjectModel(Todo.name) private todoModel: Model<Todo>) {}
+  constructor(
+    @Inject('TODO_REPOSITORY')
+    private todoRepository: Repository<Todo>,
+  ) {}
 
   async create(createTodoDto: CreateTodoDto): Promise<Todo> {
-    const createdTodo = await this.todoModel.create(createTodoDto);
+    const createdTodo = await this.todoRepository.save(createTodoDto);
     return createdTodo;
   }
 
   async findAll(): Promise<Todo[]> {
-    return this.todoModel.find().exec();
+    return this.todoRepository.find();
   }
 
-  async findOne(id: string): Promise<Todo> {
-    if (!isValidObjectId(id)) {
-      Logger.error(`ObjectId ${id} is not valid!`);
-      return;
-    }
-    return this.todoModel.findById(id).exec();
+  async findOne(todoId: string): Promise<Todo> {
+    return this.todoRepository.findOneBy({ _id: new ObjectId(todoId) });
   }
 }
