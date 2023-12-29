@@ -1,9 +1,10 @@
-import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
+import { ObjectId } from 'mongodb';
+import { Entity, Column, ObjectIdColumn } from 'typeorm';
 
 @Entity({ name: 'todos' })
 export class Todo {
-  @ObjectIdColumn({ name: '_id' })
-  id: ObjectId;
+  @ObjectIdColumn()
+  _id: ObjectId;
 
   @Column()
   description: string;
