@@ -10,7 +10,7 @@ content-type: application/json
 {
     "description": "Learn mongoDB",
     "done": false,
-    "targetDate": "2024-01-04"
+    "targetDate": "2024-01-31T00:00:00+01:00"
 }
 
 ###
@@ -21,7 +21,7 @@ content-type: application/json
 {
     "description": "Learn nestJS",
     "done": false,
-    "targetDate": "2024-02-01"
+    "targetDate": "2024-02-29T00:00:00+01:00"
 }
 
 ###
@@ -32,11 +32,21 @@ content-type: application/json
 {
     "description": "Learn nextJS",
     "done": false,
-    "targetDate": "2024-03-01"
+    "targetDate": "2024-03-31T00:00:00+01:00"
 }
 
 ###
 
-GET http://localhost:3200/todos/658f09c1a4bb4fb4fd981870 HTTP/1.1
+GET http://localhost:3200/todos/65acde49d61bf61b1a061778 HTTP/1.1
+
+###
+
+PATCH http://localhost:3200/todos/65acde49d61bf61b1a061778 HTTP/1.1
+content-type: application/json
+
+{
+    "done": true,
+    "targetDate": "2024-03-16T00:00:00+01:00"
+}
 
 ###

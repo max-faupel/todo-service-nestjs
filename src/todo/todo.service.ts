@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './todo.entity';
 import { ObjectId } from 'mongodb';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Injectable()
 export class TodoService {
@@ -22,5 +23,13 @@ export class TodoService {
 
   async findOne(todoId: string): Promise<Todo> {
     return this.todoRepository.findOneBy({ _id: new ObjectId(todoId) });
+  }
+
+  async update(
+    todoId: string,
+    updateTodoDto: UpdateTodoDto,
+  ): Promise<UpdateResult> {
+    const updatedTodo = await this.todoRepository.update(todoId, updateTodoDto);
+    return updatedTodo;
   }
 }

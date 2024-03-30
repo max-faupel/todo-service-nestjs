@@ -4,11 +4,13 @@ import {
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { TodoService } from './todo.service';
 import { Todo } from './todo.entity';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 export interface MessageEvent {
   data: string | object;
@@ -39,5 +41,10 @@ export class TodoController {
       throw new NotFoundException('Todo does not exist!');
     }
     return todo;
+  }
+
+  @Patch('/:id')
+  async update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+    await this.todoService.update(id, updateTodoDto);
   }
 }
